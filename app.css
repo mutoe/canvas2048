@@ -1,6 +1,7 @@
 
 body {
     background-color: #eee;
+    overflow: hidden;
 }
 
 h3, h5 {
@@ -36,7 +37,7 @@ input {
 
 #restartBtn {
 	display: block;
-	margin: 24px auto;
+	margin: 24px auto 0;
 	width: 128px;
 	height: 48px;
 }
