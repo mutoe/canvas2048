@@ -57,13 +57,13 @@ function addCard() {
 
 // 游戏结束检测
 function isGameover() {
-	for (var i = 0; i < 3; i++) {
+	for (var i = 0; i < 4; i++) {
 		for (var j = 0; j < 3; j++) {
 			if (data[i][j] == data[i][j + 1])
 				return false;
 		}
 	}
-	for (var j = 0; j < 3; j++) {
+	for (var j = 0; j < 4; j++) {
 		for (var i = 0; i < 3; i++){
 			if (data[i][j] == data[i + 1][j])
 				return false;
