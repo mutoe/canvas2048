@@ -3,17 +3,20 @@ body {
     background-color: #eee;
 }
 
-h3 {
+h3, h5 {
 	text-align: center;
 	margin: 24px;
 }
 
 canvas {
     border: 1px solid #ddd;
+    margin: auto;
+    display: block;
 }
 
 html {
 	overflow: hidden;
+	min-width: 360px;
 }
 
 /* 避免长按复制 */

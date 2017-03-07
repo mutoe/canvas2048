@@ -6,15 +6,10 @@ var context = canvas.getContext('2d');
 canvas.height = 360;
 canvas.width = 360;
 
-// 绘制卡片
-for (var i = 0; i < 4; i++) {
-	for (var j = 0; j < 4; j++) {
-		context.rect(85*j + 15, 85*i + 15, 75, 75);
-	}
-}
-
 // 全局变量 卡片数据
 var data = new Array;
+var score;
+
 
 function restart() {
 	// 初始化数据列表
@@ -24,6 +19,8 @@ function restart() {
 			data[i][j] = 0;
 		}
 	}
+
+	score = 0;
 
 	// 添加两张卡片
 	addCard();
@@ -45,8 +42,9 @@ function addCard() {
 	}
 	// 随机挑选一个空卡片 获取该卡片数组索引
 	var index = Math.floor(Math.random() * emptyCards.length);
-	// 填充该卡片
-	data[emptyCards[index][0]][emptyCards[index][1]] = 2;
+	// 填充该卡片 产生一个 2 或 4 的卡片 其中 4 出现的概率为 0.1
+	var value = Math.random() < 0.9 ? 2 : 4;
+	data[emptyCards[index][0]][emptyCards[index][1]] = value;
 
 	if (emptyCards.length == 1 && isGameover()) {
 		alert('游戏结束');
@@ -98,6 +96,7 @@ function move(direction) {
 					// 如果该卡片数字与上方卡片数字一致 则合并
 					if (data[colCards - 1][j] == data[i][j]) {
 						data[colCards - 1][j] *= 2;
+						score += data[colCards - 1][j];
 						data[i][j] = 0;
 						colCards++;
 						movedCards++;
@@ -137,6 +136,7 @@ function move(direction) {
 					// 如果该卡片数字与上方卡片数字一致 则合并
 					if (data[4 - colCards][j] == data[i][j]) {
 						data[4 - colCards][j] *= 2;
+						score += data[4 - colCards][j];
 						data[i][j] = 0;
 						colCards++;
 						movedCards++;
@@ -176,6 +176,7 @@ function move(direction) {
 					// 如果该卡片数字与上方卡片数字一致 则合并
 					if (data[i][colCards - 1] == data[i][j]) {
 						data[i][colCards - 1] *= 2;
+						score += data[i][colCards - 1];
 						data[i][j] = 0;
 						colCards++;
 						movedCards++;
@@ -215,6 +216,7 @@ function move(direction) {
 					// 如果该卡片数字与上方卡片数字一致 则合并
 					if (data[i][4 - rowCards] == data[i][j]) {
 						data[i][4 - rowCards] *= 2;
+						score += data[i][4 - rowCards];
 						data[i][j] = 0;
 						rowCards++;
 						movedCards++;
@@ -247,8 +249,62 @@ function move(direction) {
 // 刷新界面
 function refresh() {
 
-	context.fillStyle = "#B8D9F6";
-	context.fill();
+	// 绘制卡片
+	for (var i = 0; i < 4; i++) {
+		for (var j = 0; j < 4; j++) {
+			switch (data[i][j]) {
+				case 0:
+					context.fillStyle = "#E6F1FC";
+					break;
+				case 2:
+					context.fillStyle = "#CFE4F9";
+					break;
+				case 4:
+					context.fillStyle = "#B8D9F6";
+					break;
+				case 8:
+					context.fillStyle = "#A1CAF3";
+					break;
+				case 16:
+					context.fillStyle = "#8ABDF0";
+					break;
+				case 32:
+					context.fillStyle = "#73B0ED";
+					break;
+				case 64:
+					context.fillStyle = "#5CA3EA";
+					break;
+				case 128:
+					context.fillStyle = "#4596E7";
+					break;
+				case 256:
+					context.fillStyle = "#2E89E4";
+					break;
+				case 512:
+					context.fillStyle = "#1C7CDC";
+					break;
+				case 1024:
+					context.fillStyle = "#196FC5";
+					break;
+				case 2048:
+					context.fillStyle = "#1662AE";
+					break;
+				case 4096:
+					context.fillStyle = "#135597";
+					break;
+				case 8192:
+					context.fillStyle = "#104880";
+					break;
+				case 16384:
+					context.fillStyle = "#0D3B69";
+					break;
+				default:
+					context.fillStyle = "#0A2E52";
+					break;
+			}
+			context.fillRect(85*j + 15, 85*i + 15, 75, 75);
+		}
+	}
 
 	context.font = "20px Georgia";
 	context.fillStyle = "#FFF";
@@ -263,6 +319,10 @@ function refresh() {
 			context.fillText(data[i][j], 15+37.5 + 85*j, 15+37.5 + 85*i, 70);
 		}
 	}
+
+	// 刷新分数
+	document.getElementById('score').innerHTML = score;
+
 }
 
 function load() {
@@ -299,10 +359,8 @@ function load() {
 					} else {
 						move(8);
 					}
-
 				}
 			default:
-				// statements_def
 				break;
 		}
 	}
