@@ -340,9 +340,6 @@ function load() {
 				startX = event.touches[0].clientX;
 				startY = event.touches[0].clientY;
 				break;
-			case "touchmove":
-				event.preventDefault();
-				break;
 			case "touchend":
 				offsetX = event.changedTouches[0].clientX - startX;
 				offsetY = event.changedTouches[0].clientY - startY;
@@ -371,5 +368,9 @@ function load() {
 }
 
 window.addEventListener('load', load, false);
+
+document.querySelector('body').addEventListener('touchmove', function(e) {
+    e.preventDefault();
+});
 
 restart();
