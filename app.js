@@ -3,8 +3,8 @@
 var canvas = document.getElementById("game2048");
 var context = canvas.getContext('2d');
 
-canvas.height = 360;
-canvas.width = 360;
+canvas.height = 480;
+canvas.width = 480;
 
 // 全局变量 卡片数据
 var data = new Array;
@@ -302,11 +302,11 @@ function refresh() {
 					context.fillStyle = "#0A2E52";
 					break;
 			}
-			context.fillRect(85*j + 15, 85*i + 15, 75, 75);
+			context.fillRect(113*j + 20, 113*i + 20, 100, 100);
 		}
 	}
 
-	context.font = "20px Georgia";
+	context.font = "26px Georgia";
 	context.fillStyle = "#FFF";
 	context.textAlign = "center";
 	context.textBaseline = "middle";
@@ -316,7 +316,7 @@ function refresh() {
 		for (var j = 0; j < 4; j++) {
 			// 若卡片数字为0, 则不绘制
 			if (data[i][j] == 0) continue;
-			context.fillText(data[i][j], 15+37.5 + 85*j, 15+37.5 + 85*i, 70);
+			context.fillText(data[i][j], 70 + 113*j, 70 + 113*i, 93);
 		}
 	}
 
