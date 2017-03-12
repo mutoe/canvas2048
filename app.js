@@ -244,6 +244,9 @@ function move(direction) {
 		addCard();
 		refresh();
 	}
+
+	document.getElementById('hide').style.display = "none";
+
 }
 
 // 刷新界面
@@ -369,8 +372,26 @@ function load() {
 
 window.addEventListener('load', load, false);
 
+// 避免长按菜单
 document.querySelector('body').addEventListener('touchmove', function(e) {
     e.preventDefault();
 });
+
+// 键盘监听
+document.onkeydown = function(event) {
+	var e = event || window.event || arguments.callee.caller.arguments[0];
+	if (e && ( e.keyCode == 38 || e.keyCode == 87) ) { // 上 / W
+		move(8);
+	}
+	if (e && ( e.keyCode == 40 || e.keyCode == 83) ) { // 下 / S
+		move(2);
+	}
+	if (e && ( e.keyCode == 37 || e.keyCode == 65) ) { // 左 / A
+		move(4);
+	}
+	if (e && ( e.keyCode == 39 || e.keyCode == 68) ) { // 右 / D
+		move(6);
+	}
+}
 
 restart();

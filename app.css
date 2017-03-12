@@ -9,6 +9,12 @@ h3, h5 {
 	margin: 12px;
 }
 
+.small {
+	color: #999;
+	font-size: 12px;
+	text-align: center;
+}
+
 canvas {
     border: 1px solid #ddd;
     margin: auto;
@@ -37,7 +43,7 @@ input {
 
 #restartBtn {
 	display: block;
-	margin: 24px auto 0;
+	margin: 24px auto;
 	width: 128px;
 	height: 48px;
 }
